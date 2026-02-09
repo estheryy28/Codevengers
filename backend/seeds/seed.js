@@ -1650,12 +1650,12 @@ async function seedDatabase() {
         // Create admin user
         console.log('Creating admin user...');
         const adminUser = new User({
-            username: 'admin',
-            password: 'admin123',
+            username: 'Esther',
+            password: 'AiTronix@2026!',
             role: 'ADMIN'
         });
         await adminUser.save();
-        console.log('Admin user created: admin / admin123');
+        console.log('Admin user created: Esther / AiTronix@2026!');
 
         // Create sample test user
         const testUser = new User({
