@@ -16,11 +16,11 @@ const DEFAULT_TIMEOUT = 5000;  // 5 seconds
 const MAX_OUTPUT_SIZE = 65536; // 64KB
 
 // Compiler configurations for each language
-// Using absolute paths for Windows compatibility
+// Using command names to rely on system PATH
 const GCC_PATH = 'C:\\dev-tools\\mingw64\\bin\\gcc.exe';
 const GPP_PATH = 'C:\\dev-tools\\mingw64\\bin\\g++.exe';
-const JAVA_PATH = 'C:\\dev-tools\\java\\bin\\java.exe';
-const JAVAC_PATH = 'C:\\dev-tools\\java\\bin\\javac.exe';
+const JAVA_PATH = 'java';
+const JAVAC_PATH = 'javac';
 
 const LANGUAGE_CONFIG = {
     'C': {
@@ -89,9 +89,16 @@ function runCommand(command, args, options = {}) {
         let stderr = '';
         let killed = false;
 
+        // Extend PATH to include MinGW bin for gcc/g++ to find required DLLs
+        const extendedEnv = {
+            ...process.env,
+            PATH: `C:\\dev-tools\\mingw64\\bin;${process.env.PATH || ''}`
+        };
+
         const proc = spawn(command, args, {
             cwd,
-            windowsHide: true  // Hide console window on Windows
+            windowsHide: true,  // Hide console window on Windows
+            env: extendedEnv
         });
 
         // Set timeout

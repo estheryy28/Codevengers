@@ -1007,7 +1007,12 @@ int main() {
     }
     return 0;
 }`,
-        testCases: [{ input: "85", expectedOutput: "Pass" }],
+        testCases: [
+            { input: "85", expectedOutput: "Pass" },
+            { input: "51", expectedOutput: "Pass" },
+            { input: "50", expectedOutput: "Fail" },
+            { input: "30", expectedOutput: "Fail" }
+        ],
         points: 100
     },
     // Code 2
@@ -1039,7 +1044,12 @@ int main() {
     }
     return 0;
 }`,
-        testCases: [{ input: "10 20", expectedOutput: "30" }],
+        testCases: [
+            { input: "10 20", expectedOutput: "30" },
+            { input: "0 5", expectedOutput: "5" },
+            { input: "-5 10", expectedOutput: "5" },
+            { input: "-3 -7", expectedOutput: "-10" }
+        ],
         points: 100
     },
     // Code 3
@@ -1089,7 +1099,12 @@ int main() {
     }
     return 0;
 }`,
-        testCases: [{ input: "7", expectedOutput: "Odd" }],
+        testCases: [
+            { input: "7", expectedOutput: "Odd" },
+            { input: "10", expectedOutput: "Even" },
+            { input: "0", expectedOutput: "Even" },
+            { input: "-3", expectedOutput: "Odd" }
+        ],
         points: 100
     },
     // Code 5
@@ -1115,7 +1130,12 @@ int main() {
     }
     return 0;
 }`,
-        testCases: [{ input: "10 20 30", expectedOutput: "Average = 20" }],
+        testCases: [
+            { input: "10 20 30", expectedOutput: "Average = 20" },
+            { input: "5 5 5", expectedOutput: "Average = 5" },
+            { input: "0 0 0", expectedOutput: "Average = 0" },
+            { input: "1 2 2", expectedOutput: "Average = 1" }
+        ],
         points: 150
     },
     // Code 6
@@ -1147,7 +1167,12 @@ int main() {
     }
     return 0;
 }`,
-        testCases: [{ input: "5", expectedOutput: "120" }],
+        testCases: [
+            { input: "5", expectedOutput: "120" },
+            { input: "1", expectedOutput: "1" },
+            { input: "0", expectedOutput: "1" },
+            { input: "3", expectedOutput: "6" }
+        ],
         points: 150
     },
     // Code 7
@@ -1183,7 +1208,11 @@ int main() {
     }
     return 0;
 }`,
-        testCases: [{ input: "4 2 4 6 8", expectedOutput: "20" }],
+        testCases: [
+            { input: "4 2 4 6 8", expectedOutput: "20" },
+            { input: "3 1 1 1", expectedOutput: "3" },
+            { input: "1 5", expectedOutput: "5" }
+        ],
         points: 150
     },
     // Code 8
@@ -1219,7 +1248,13 @@ int main() {
     }
     return 0;
 }`,
-        testCases: [{ input: "75", expectedOutput: "First Class" }],
+        testCases: [
+            { input: "75", expectedOutput: "First Class" },
+            { input: "60", expectedOutput: "Pass" },
+            { input: "40", expectedOutput: "Pass" },
+            { input: "39", expectedOutput: "Fail" },
+            { input: "0", expectedOutput: "Fail" }
+        ],
         points: 150
     },
     // Code 9
@@ -1262,7 +1297,14 @@ int main() {
     }
     return 0;
 }`,
-        testCases: [{ input: "9", expectedOutput: "Not Prime" }],
+        testCases: [
+            { input: "2", expectedOutput: "Prime" },
+            { input: "3", expectedOutput: "Prime" },
+            { input: "9", expectedOutput: "Not Prime" },
+            { input: "1", expectedOutput: "Not Prime" },
+            { input: "0", expectedOutput: "Not Prime" },
+            { input: "17", expectedOutput: "Prime" }
+        ],
         points: 200
     },
     // Code 10
@@ -1295,7 +1337,13 @@ int main() {
     }
     return 0;
 }`,
-        testCases: [{ input: "admin 1234", expectedOutput: "Login Successful" }],
+        testCases: [
+            { input: "admin 1234", expectedOutput: "Login Successful" },
+            { input: "admin 0000", expectedOutput: "Invalid Login" },
+            { input: "user 1234", expectedOutput: "Invalid Login" },
+            { input: "ADMIN 1234", expectedOutput: "Invalid Login" },
+            { input: "admin Admin", expectedOutput: "Invalid Login" }
+        ],
         points: 200
     },
     // === C++ QUESTIONS ===
@@ -1330,7 +1378,12 @@ int main() {
     }
     return 0;
 }`,
-        testCases: [{ input: "85", expectedOutput: "Pass" }],
+        testCases: [
+            { input: "85", expectedOutput: "Pass" },
+            { input: "51", expectedOutput: "Pass" },
+            { input: "50", expectedOutput: "Fail" },
+            { input: "30", expectedOutput: "Fail" }
+        ],
         points: 100
     },
     // Code 2
@@ -1362,7 +1415,12 @@ int main() {
     }
     return 0;
 }`,
-        testCases: [{ input: "10 20", expectedOutput: "30" }],
+        testCases: [
+            { input: "10 20", expectedOutput: "30" },
+            { input: "0 5", expectedOutput: "5" },
+            { input: "-5 10", expectedOutput: "5" },
+            { input: "-3 -7", expectedOutput: "-10" }
+        ],
         points: 100
     },
     // Code 3
@@ -1416,7 +1474,12 @@ int main() {
     }
     return 0;
 }`,
-        testCases: [{ input: "7", expectedOutput: "Odd" }],
+        testCases: [
+            { input: "7", expectedOutput: "Odd" },
+            { input: "10", expectedOutput: "Even" },
+            { input: "0", expectedOutput: "Even" },
+            { input: "-3", expectedOutput: "Odd" }
+        ],
         points: 100
     },
     // Code 5
@@ -1444,7 +1507,12 @@ int main() {
     }
     return 0;
 }`,
-        testCases: [{ input: "10 20 30", expectedOutput: "Average = 20" }],
+        testCases: [
+            { input: "10 20 30", expectedOutput: "Average = 20" },
+            { input: "5 5 5", expectedOutput: "Average = 5" },
+            { input: "0 0 0", expectedOutput: "Average = 0" },
+            { input: "1 2 2", expectedOutput: "Average = 1" }
+        ],
         points: 150
     },
     // Code 6
@@ -1478,7 +1546,12 @@ int main() {
     }
     return 0;
 }`,
-        testCases: [{ input: "5", expectedOutput: "120" }],
+        testCases: [
+            { input: "5", expectedOutput: "120" },
+            { input: "1", expectedOutput: "1" },
+            { input: "0", expectedOutput: "1" },
+            { input: "3", expectedOutput: "6" }
+        ],
         points: 150
     },
     // Code 7
@@ -1516,7 +1589,11 @@ int main() {
     }
     return 0;
 }`,
-        testCases: [{ input: "4 2 4 6 8", expectedOutput: "20" }],
+        testCases: [
+            { input: "4 2 4 6 8", expectedOutput: "20" },
+            { input: "3 1 1 1", expectedOutput: "3" },
+            { input: "1 5", expectedOutput: "5" }
+        ],
         points: 150
     },
     // Code 8
@@ -1554,7 +1631,13 @@ int main() {
     }
     return 0;
 }`,
-        testCases: [{ input: "75", expectedOutput: "First Class" }],
+        testCases: [
+            { input: "75", expectedOutput: "First Class" },
+            { input: "60", expectedOutput: "Pass" },
+            { input: "40", expectedOutput: "Pass" },
+            { input: "39", expectedOutput: "Fail" },
+            { input: "0", expectedOutput: "Fail" }
+        ],
         points: 150
     },
     // Code 9
@@ -1599,7 +1682,14 @@ int main() {
     }
     return 0;
 }`,
-        testCases: [{ input: "9", expectedOutput: "Not Prime" }],
+        testCases: [
+            { input: "2", expectedOutput: "Prime" },
+            { input: "3", expectedOutput: "Prime" },
+            { input: "9", expectedOutput: "Not Prime" },
+            { input: "1", expectedOutput: "Not Prime" },
+            { input: "0", expectedOutput: "Not Prime" },
+            { input: "17", expectedOutput: "Prime" }
+        ],
         points: 200
     },
     // Code 10
@@ -1629,7 +1719,13 @@ int main() {
     }
     return 0;
 }`,
-        testCases: [{ input: "admin 1234", expectedOutput: "Login Successful" }],
+        testCases: [
+            { input: "admin 1234", expectedOutput: "Login Successful" },
+            { input: "admin 0000", expectedOutput: "Invalid Login" },
+            { input: "user 1234", expectedOutput: "Invalid Login" },
+            { input: "ADMIN 1234", expectedOutput: "Invalid Login" },
+            { input: "admin Admin", expectedOutput: "Invalid Login" }
+        ],
         points: 200
     }
 ];
@@ -1651,12 +1747,12 @@ async function seedDatabase() {
         // Create admin user
         console.log('Creating admin user...');
         const adminUser = new User({
-            username: 'esther',
+            username: 'admin',
             password: 'AiTronix@2026!',
             role: 'ADMIN'
         });
         await adminUser.save();
-        console.log('Admin user created: esther / AiTronix@2026!');
+        console.log('Admin user created: admin / AiTronix@2026!');
 
         // Create sample test user
         const testUser = new User({

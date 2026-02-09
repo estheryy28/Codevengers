@@ -259,6 +259,7 @@ router.post('/:id/submit', async (req, res) => {
             return {
                 testCaseIndex: tr.testCaseIndex,
                 passed: tr.passed,
+                input: !testCase.isHidden ? testCase.input : '[Hidden]',
                 actualOutput: tr.actualOutput,
                 expectedOutput: !testCase.isHidden ? tr.expectedOutput : '[Hidden]',
                 executionTime: tr.executionTime,

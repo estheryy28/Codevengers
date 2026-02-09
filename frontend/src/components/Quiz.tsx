@@ -9,6 +9,7 @@ import CodeEditor from './CodeEditor';
 interface TestResult {
     testCaseIndex: number;
     passed: boolean;
+    input: string;
     actualOutput: string;
     expectedOutput: string;
     executionTime: number;
@@ -421,7 +422,7 @@ export default function Quiz() {
                                                         )}
                                                         <div className="flex-1 min-w-0">
                                                             <div className="font-medium">
-                                                                Test {i + 1} {test.isHidden && '(Hidden)'}
+                                                                Test {i + 1}: <code className="bg-white/10 px-1 rounded text-xs ml-2">{test.input}</code> {test.isHidden && '(Hidden)'}
                                                             </div>
                                                             {!test.passed && !test.isHidden && (
                                                                 <div className="mt-1 text-xs">
