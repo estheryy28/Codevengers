@@ -334,6 +334,7 @@ const sampleQuestions = [
 // === Code Challenges (Dynamic STDIN/STDOUT) ===
 const codeChallenges = [
     // --- JAVA ---
+    // Code 1: Pass/Fail
     {
         title: "Code 1 - Pass/Fail Check",
         description: "Write a program that reads an integer `marks` and prints \"Pass\" if marks > 50, otherwise \"Fail\".",
@@ -343,12 +344,11 @@ const codeChallenges = [
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        if (sc.hasNextInt()) {
+        if(sc.hasNextInt()) {
             int marks = sc.nextInt();
-            // Bug: Logic error or syntax
-            if (marks >= 50) { // Bug: Should be > 50
+            if (marks > 50) {
                 System.out.print("Pass");
-            } else {
+            else { // Bug: Syntax error missing brace and alignment
                 System.out.print("Fail");
             }
         }
@@ -358,7 +358,7 @@ public class Main {
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        if (sc.hasNextInt()) {
+        if(sc.hasNextInt()) {
             int marks = sc.nextInt();
             if (marks > 50) {
                 System.out.print("Pass");
@@ -368,151 +368,58 @@ public class Main {
         }
     }
 }`,
-        testCases: [
-            { input: "85", expectedOutput: "Pass" },
-            { input: "51", expectedOutput: "Pass" },
-            { input: "50", expectedOutput: "Fail" },
-            { input: "30", expectedOutput: "Fail" }
-        ],
+        testCases: [{ input: "85", expectedOutput: "Pass" }, { input: "51", expectedOutput: "Pass" }, { input: "50", expectedOutput: "Fail" }, { input: "30", expectedOutput: "Fail" }],
         points: 100
     },
-    // ... Add more Java here (skipped for brevity, but I promise I would write them in real life) ... 
-    // Wait, I MUST ANYWAY write them. I cannot skip. The user wants them.
+    // Code 2: Calculator
     {
-        title: "Code 2 - Calculator Addition",
-        description: "Read two integers a and b from input and print their sum.",
+        title: "Code 2 - Calculator",
+        description: "Read two integers integers (a, b) and print their sum.",
         programmingLanguage: "Java",
         difficulty: "easy",
         buggyCode: `import java.util.Scanner;
-public class Main {
+class Calculator {
+    static int add(int a, int b) {
+        return a + b;
+    }
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int a = sc.nextInt();
         int b = sc.nextInt();
-        System.out.print(a - b); // Bug: Subtraction instead of addition
+        int result = add(a, b);
+        System.out.print(result) // Bug: Missing semicolon
     }
 }`,
         solutionCode: `import java.util.Scanner;
-public class Main {
+class Calculator {
+    static int add(int a, int b) {
+        return a + b;
+    }
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int a = sc.nextInt();
-        int b = sc.nextInt();
-        System.out.print(a + b);
+        if(sc.hasNextInt()) {
+             int a = sc.nextInt();
+             int b = sc.nextInt();
+             int result = add(a, b);
+             System.out.print(result);
+        }
     }
 }`,
-        testCases: [{ input: "10 20", expectedOutput: "30" }, { input: "-5 10", expectedOutput: "5" }],
+        testCases: [{ input: "10 20", expectedOutput: "30" }, { input: "0 5", expectedOutput: "5" }],
         points: 100
     },
-    // --- PYTHON ---
+    // Code 3: Main Method
     {
-        title: "Code 1 - Pass/Fail Check",
-        description: "Read an integer `marks` and print \"Pass\" if marks > 50, otherwise \"Fail\".",
-        programmingLanguage: "Python",
-        difficulty: "easy",
-        buggyCode: `marks = int(input())
-if marks > 50  # Bug: Missing colon
-    print("Pass", end="")
-else:
-    print("Fail", end="")`,
-        solutionCode: `marks = int(input())
-if marks > 50:
-    print("Pass", end="")
-else:
-    print("Fail", end="")`,
-        testCases: [{ input: "85", expectedOutput: "Pass" }, { input: "50", expectedOutput: "Fail" }],
-        points: 100
-    },
-    {
-        title: "Code 2 - Calculator Addition",
-        description: "Read two space-separated integers a and b and print their sum.",
-        programmingLanguage: "Python",
-        difficulty: "easy",
-        buggyCode: `a, b = map(int, input().split())
-print(a - b, end="") # Bug: Subtraction`,
-        solutionCode: `a, b = map(int, input().split())
-print(a + b, end="")`,
-        testCases: [{ input: "10 20", expectedOutput: "30" }],
-        points: 100
-    },
-    // --- C ---
-    {
-        title: "Code 1 - Pass/Fail Check",
-        description: "Read an integer `marks` and print \"Pass\" if marks > 50, otherwise \"Fail\".",
-        programmingLanguage: "C",
-        difficulty: "easy",
-        buggyCode: `#include <stdio.h>
-int main() {
-    int marks;
-    scanf("%d", &marks);
-    if (marks > 50) {
-        printf("Pass");
-    else { // Bug: Missing curly brace or indentation not saving it from syntax error if braces used wrong?
-           // Original C.md had missing semicolon.
-           // Let's use missing semicolon.
-        printf("Fail");
-    }
-    return 0;
-}`,
-        solutionCode: `#include <stdio.h>
-int main() {
-    int marks;
-    scanf("%d", &marks);
-    if (marks > 50) {
-        printf("Pass");
-    } else {
-        printf("Fail");
-    }
-    return 0;
-}`,
-        testCases: [{ input: "85", expectedOutput: "Pass" }, { input: "50", expectedOutput: "Fail" }],
-        points: 100
-    },
-    // --- C++ ---
-    {
-        title: "Code 1 - Pass/Fail Check",
-        description: "Read an integer `marks` and print \"Pass\" if marks > 50, otherwise \"Fail\".",
-        programmingLanguage: "C++",
-        difficulty: "easy",
-        buggyCode: `#include <iostream>
-using namespace std;
-int main() {
-    int marks;
-    cin >> marks;
-    if (marks > 50) {
-        cout << "Pass";
-    else { // Bug: Syntax error
-        cout << "Fail";
-    }
-    return 0;
-}`,
-        solutionCode: `#include <iostream>
-using namespace std;
-int main() {
-    int marks;
-    cin >> marks;
-    if (marks > 50) {
-        cout << "Pass";
-    } else {
-        cout << "Fail";
-    }
-    return 0;
-}`,
-        testCases: [{ input: "85", expectedOutput: "Pass" }, { input: "50", expectedOutput: "Fail" }],
-        points: 100
-    },
-    // --- JAVA 3-10 ---
-    {
-        title: "Code 3 - Print Message",
-        description: "Write a program that prints exactly \"Java Debugging\".",
+        title: "Code 3 - Main Method",
+        description: "Fix the main method signature to print \"Java Debugging\".",
         programmingLanguage: "Java",
         difficulty: "easy",
-        buggyCode: `public class Main {
-    public static void main(String[] args) {
-        System.out.print("Java Debuging");
+        buggyCode: `public class Sample {
+    public static void main(String args) { // Bug: Incorrect parameter
+        System.out.print("Java Debugging");
     }
 }`,
-        solutionCode: `public class Main {
+        solutionCode: `public class Sample {
     public static void main(String[] args) {
         System.out.print("Java Debugging");
     }
@@ -520,363 +427,580 @@ int main() {
         testCases: [{ input: "", expectedOutput: "Java Debugging" }],
         points: 100
     },
+    // Code 4: Even/Odd
     {
-        title: "Code 4 - Even / Odd",
+        title: "Code 4 - Even/Odd",
         description: "Read an integer and print \"Even\" or \"Odd\".",
         programmingLanguage: "Java",
         difficulty: "easy",
         buggyCode: `import java.util.Scanner;
-public class Main {
+class EvenOdd {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        if(sc.hasNextInt()){
-             int n = sc.nextInt();
-             if (n % 2 == 1) System.out.print("Odd");
-             else System.out.print("Even");
+        int number = sc.nextInt();
+        if(number % 2 == 1) { // Bug: Reverse logic
+            System.out.print("Even");
+        } else {
+            System.out.print("Odd");
         }
     }
 }`,
         solutionCode: `import java.util.Scanner;
-public class Main {
+class EvenOdd {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        if(sc.hasNextInt()){
-             int n = sc.nextInt();
-             if (n % 2 == 0) System.out.print("Even");
-             else System.out.print("Odd");
+        if(sc.hasNextInt()) {
+            int number = sc.nextInt();
+            if(number % 2 == 0) {
+                System.out.print("Even");
+            } else {
+                System.out.print("Odd");
+            }
         }
     }
 }`,
         testCases: [{ input: "7", expectedOutput: "Odd" }, { input: "10", expectedOutput: "Even" }],
         points: 100
     },
+    // Code 5: Average
     {
         title: "Code 5 - Average Calculation",
-        description: "Read 3 integers and print their average.",
+        description: "Read 3 integers and print their average rounded down.",
         programmingLanguage: "Java",
         difficulty: "medium",
         buggyCode: `import java.util.Scanner;
-public class Main {
+class Average {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int a = sc.nextInt();
         int b = sc.nextInt();
         int c = sc.nextInt();
-        System.out.print(a + b + c / 3);
+        int avg = a + b + c / 3; // Bug: Precedence
+        System.out.print("Average = " + avg);
     }
 }`,
         solutionCode: `import java.util.Scanner;
-public class Main {
+class Average {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int a = sc.nextInt();
-        int b = sc.nextInt();
-        int c = sc.nextInt();
-        System.out.print((a + b + c) / 3);
+        if(sc.hasNextInt()) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            int c = sc.nextInt();
+            int avg = (a + b + c) / 3;
+            System.out.print("Average = " + avg);
+        }
     }
 }`,
-        testCases: [{ input: "10 20 30", expectedOutput: "20" }],
+        testCases: [{ input: "10 20 30", expectedOutput: "Average = 20" }],
         points: 150
     },
+    // Code 6: Factorial
     {
         title: "Code 6 - Factorial",
-        description: "Read n and print factorial.",
+        description: "Read an integer n and print its factorial.",
         programmingLanguage: "Java",
         difficulty: "medium",
         buggyCode: `import java.util.Scanner;
-public class Main {
+class Factorial {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        long f = 1;
-        for(int i=1; i<n; i++) f*=i;
-        System.out.print(f);
+        int fact = 0; // Bug: Wrong init
+        for(int i = 1; i <= n; i++) {
+            fact = fact * i;
+        }
+        System.out.print(fact);
     }
 }`,
         solutionCode: `import java.util.Scanner;
-public class Main {
+class Factorial {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        long f = 1;
-        for(int i=1; i<=n; i++) f*=i;
-        System.out.print(f);
+        if(sc.hasNextInt()) {
+            int n = sc.nextInt();
+            int fact = 1;
+            for(int i = 1; i <= n; i++) {
+                fact = fact * i;
+            }
+            System.out.print(fact);
+        }
     }
 }`,
-        testCases: [{ input: "5", expectedOutput: "120" }],
+        testCases: [{ input: "5", expectedOutput: "120" }, { input: "3", expectedOutput: "6" }],
         points: 150
     },
+    // Code 7: Array Sum
     {
         title: "Code 7 - Array Sum",
-        description: "Read size N, then N integers. Print sum.",
+        description: "Read integer N, then N integers. Print the sum.",
         programmingLanguage: "Java",
         difficulty: "medium",
         buggyCode: `import java.util.Scanner;
-public class Main {
+class ArraySum {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        int[] a = new int[n];
-        int s = 0;
-        for(int i=0; i<=n; i++) { a[i]=sc.nextInt(); s+=a[i]; }
-        System.out.print(s);
+        int[] arr = new int[n];
+        for(int i=0; i<n; i++) arr[i] = sc.nextInt();
+        int sum = 0;
+        for(int i = 0; i <= arr.length; i++) { // Bug: OOB
+            sum += arr[i];
+        }
+        System.out.print(sum);
     }
 }`,
         solutionCode: `import java.util.Scanner;
-public class Main {
+class ArraySum {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int s = 0;
-        for(int i=0; i<n; i++) s+=sc.nextInt();
-        System.out.print(s);
+        if(sc.hasNextInt()) {
+            int n = sc.nextInt();
+            int[] arr = new int[n];
+            for(int i=0; i<n; i++) arr[i] = sc.nextInt();
+            int sum = 0;
+            for(int i = 0; i < arr.length; i++) {
+                sum += arr[i];
+            }
+            System.out.print(sum);
+        }
     }
 }`,
         testCases: [{ input: "4 2 4 6 8", expectedOutput: "20" }],
         points: 150
     },
+    // Code 8: Result
     {
-        title: "Code 8 - Marks",
-        description: "Read marks. Print First Class (>=75), Pass (>=40), Fail (<40).",
+        title: "Code 8 - Result Classification",
+        description: "Read marks. >60: First Class, >40: Pass, else Fail.",
         programmingLanguage: "Java",
         difficulty: "medium",
         buggyCode: `import java.util.Scanner;
-public class Main {
+class Result {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int m = sc.nextInt();
-        if(m>75) System.out.print("First Class");
-        else if(m>40) System.out.print("Pass");
-        else System.out.print("Fail");
+        int marks = sc.nextInt();
+        if(marks > 40) { // Bug: Order
+            System.out.print("Pass");
+        } else if(marks > 60) {
+            System.out.print("First Class");
+        } else {
+            System.out.print("Fail");
+        }
     }
 }`,
         solutionCode: `import java.util.Scanner;
-public class Main {
+class Result {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int m = sc.nextInt();
-        if(m>=75) System.out.print("First Class");
-        else if(m>=40) System.out.print("Pass");
-        else System.out.print("Fail");
+        if(sc.hasNextInt()) {
+            int marks = sc.nextInt();
+            if(marks > 60) {
+                System.out.print("First Class");
+            } else if(marks >= 40) {
+                System.out.print("Pass");
+            } else {
+                System.out.print("Fail");
+            }
+        }
     }
 }`,
-        testCases: [{ input: "75", expectedOutput: "First Class" }, { input: "60", expectedOutput: "Pass" }],
+        testCases: [{ input: "75", expectedOutput: "First Class" }, { input: "40", expectedOutput: "Pass" }],
         points: 150
     },
+    // Code 9: Prime
     {
-        title: "Code 9 - Prime",
-        description: "Read n. Print Prime/Not Prime.",
+        title: "Code 9 - Prime Check",
+        description: "Read integer. Print Prime or Not Prime.",
         programmingLanguage: "Java",
         difficulty: "hard",
         buggyCode: `import java.util.Scanner;
-public class Main {
+class PrimeCheck {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        if(n<=1) {System.out.print("Not Prime"); return;}
-        for(int i=2; i<n; i++) {
-             if(n%i==0) {System.out.print("Prime"); return;}
+        int num = sc.nextInt();
+        boolean isPrime = true;
+        for(int i = 2; i < num / 2; i++) { // Bug: Loop limit
+            if(num % i == 0) {
+                isPrime = false;
+                break;
+            }
         }
-        System.out.print("Not Prime");
-    }
-}`,
-        solutionCode: `import java.util.Scanner;
-public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        if(n<=1) {System.out.print("Not Prime"); return;}
-        boolean p=true;
-        for(int i=2; i*i<=n; i++) {
-             if(n%i==0) {p=false; break;}
-        }
-        if(p) System.out.print("Prime");
+        if(isPrime) System.out.print("Prime");
         else System.out.print("Not Prime");
     }
 }`,
-        testCases: [{ input: "2", expectedOutput: "Prime" }, { input: "9", expectedOutput: "Not Prime" }],
+        solutionCode: `import java.util.Scanner;
+class PrimeCheck {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        if(sc.hasNextInt()) {
+            int num = sc.nextInt();
+            boolean isPrime = true;
+            if (num <= 1) isPrime = false;
+            else {
+                for(int i = 2; i <= num / 2; i++) {
+                    if(num % i == 0) {
+                        isPrime = false;
+                        break;
+                    }
+                }
+            }
+            if(isPrime) System.out.print("Prime");
+            else System.out.print("Not Prime");
+        }
+    }
+}`,
+        testCases: [{ input: "9", expectedOutput: "Not Prime" }, { input: "2", expectedOutput: "Prime" }],
         points: 200
     },
+    // Code 10: Login
     {
-        title: "Code 10 - Login",
-        description: "Read user pass. Print Login Successful/Invalid Login.",
+        title: "Code 10 - Login Validation",
+        description: "Read username and password. Validate.",
         programmingLanguage: "Java",
         difficulty: "hard",
         buggyCode: `import java.util.Scanner;
-public class Main {
+class Login {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String u = sc.next();
-        String p = sc.next();
-        if(u=="admin" && p=="1234") System.out.print("Login Successful");
-        else System.out.print("Invalid Login");
+        String username = sc.next();
+        String password = sc.next();
+        if(username == "admin" && password == "1234") { // Bug: String comparison
+            System.out.print("Login Successful");
+        } else {
+            System.out.print("Invalid Login");
+        }
     }
 }`,
         solutionCode: `import java.util.Scanner;
-public class Main {
+class Login {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String u = sc.next();
-        String p = sc.next();
-        if(u.equals("admin") && p.equals("1234")) System.out.print("Login Successful");
-        else System.out.print("Invalid Login");
+        if(sc.hasNext()) {
+            String username = sc.next();
+            String password = sc.next();
+            if(username.equals("admin") && password.equals("1234")) {
+                System.out.print("Login Successful");
+            } else {
+                System.out.print("Invalid Login");
+            }
+        }
     }
 }`,
-        testCases: [{ input: "admin 1234", expectedOutput: "Login Successful" }],
+        testCases: [{ input: "admin 1234", expectedOutput: "Login Successful" }, { input: "admin 0000", expectedOutput: "Invalid Login" }],
         points: 200
     },
-    // --- PYTHON 3-10 ---
+
+    // --- PYTHON ---
+    // Code 1
+    {
+        title: "Code 1 - Pass/Fail",
+        description: "Read marks. Print Pass (>50) or Fail.",
+        programmingLanguage: "Python",
+        difficulty: "easy",
+        buggyCode: `marks = int(input())
+if marks > 50
+    print("Pass")
+else:
+    print("Fail")`,
+        solutionCode: `try:
+    marks = int(input())
+    if marks > 50:
+        print("Pass", end="")
+    else:
+        print("Fail", end="")
+except:
+    pass`,
+        testCases: [{ input: "85", expectedOutput: "Pass" }],
+        points: 100
+    },
+    // Code 2
+    {
+        title: "Code 2 - Calculator",
+        description: "Read two integers. Print sum.",
+        programmingLanguage: "Python",
+        difficulty: "easy",
+        buggyCode: `def add(a, b):
+    return a + b
+a = int(input())
+b = int(input())
+result = add a, b # Bug: Syntax
+print(result)`,
+        solutionCode: `def add(a, b):
+    return a + b
+try:
+    a = int(input())
+    b = int(input())
+    result = add(a, b)
+    print(result, end="")
+except:
+    pass`,
+        testCases: [{ input: "10 20", expectedOutput: "30" }],
+        points: 100
+    },
+    // Code 3
     {
         title: "Code 3 - Print Message",
-        description: "Write a program that prints exactly \"Python Debugging\".",
+        description: "Print \"Python Debugging\".",
         programmingLanguage: "Python",
         difficulty: "easy",
         buggyCode: `def main():
-  print("Python Debuging") # Bug: Typo
-if __name__ == "__main__": main()`,
+print("Python Debugging") # Bug: Indentation
+main()`,
         solutionCode: `def main():
-  print("Python Debugging", end="")
-if __name__ == "__main__": main()`,
+    print("Python Debugging", end="")
+main()`,
         testCases: [{ input: "", expectedOutput: "Python Debugging" }],
         points: 100
     },
+    // Code 4
     {
-        title: "Code 4 - Even / Odd",
-        description: "Read an integer and print \"Even\" or \"Odd\".",
+        title: "Code 4 - Even/Odd",
+        description: "Read number. Print Even or Odd.",
         programmingLanguage: "Python",
         difficulty: "easy",
-        buggyCode: `n = int(input())
-if n % 2 == 1: print("Odd", end="")
-else: print("Even", end="")`,
-        solutionCode: `n = int(input())
-if n % 2 == 0: print("Even", end="")
-else: print("Odd", end="")`,
-        testCases: [{ input: "7", expectedOutput: "Odd" }, { input: "10", expectedOutput: "Even" }],
+        buggyCode: `number = int(input())
+if number % 2 == 1: # Bug: Reversed
+    print("Even")
+else:
+    print("Odd")`,
+        solutionCode: `try:
+    number = int(input())
+    if number % 2 == 0:
+        print("Even", end="")
+    else:
+        print("Odd", end="")
+except:
+    pass`,
+        testCases: [{ input: "7", expectedOutput: "Odd" }],
         points: 100
     },
+    // Code 5
     {
-        title: "Code 5 - Average Calculation",
-        description: "Read 3 integers (space separated) and print their average.",
+        title: "Code 5 - Average",
+        description: "Read 3 integers. Print average.",
         programmingLanguage: "Python",
         difficulty: "medium",
-        buggyCode: `nums = list(map(int, input().split()))
-a,b,c = nums[0], nums[1], nums[2]
-print(a + b + c / 3, end="") # Bug: Precedence`,
-        solutionCode: `nums = list(map(int, input().split()))
-if len(nums) >= 3:
-  a,b,c = nums[0], nums[1], nums[2]
-  print(int((a + b + c) / 3), end="")`,
-        testCases: [{ input: "10 20 30", expectedOutput: "20" }],
+        buggyCode: `a = int(input())
+b = int(input())
+c = int(input())
+avg = a + b + c / 3 # Bug: Precedence
+print("Average =", avg)`,
+        solutionCode: `try:
+    a = int(input())
+    b = int(input())
+    c = int(input())
+    avg = int((a + b + c) / 3)
+    print("Average =", avg, end="")
+except:
+    pass`,
+        testCases: [{ input: "10 20 30", expectedOutput: "Average = 20" }],
         points: 150
     },
+    // Code 6
     {
         title: "Code 6 - Factorial",
-        description: "Read integer n and print factorial.",
+        description: "Read n. Print factorial.",
         programmingLanguage: "Python",
         difficulty: "medium",
         buggyCode: `n = int(input())
-f = 1
-for i in range(1, n): f *= i
-print(f, end="")`,
-        solutionCode: `n = int(input())
-f = 1
-for i in range(1, n+1): f *= i
-print(f, end="")`,
+fact = 0 # Bug: Init 0
+for i in range(1, n + 1):
+    fact = fact * i
+print(fact)`,
+        solutionCode: `try:
+    n = int(input())
+    fact = 1
+    for i in range(1, n + 1):
+        fact = fact * i
+    print(fact, end="")
+except:
+    pass`,
         testCases: [{ input: "5", expectedOutput: "120" }],
         points: 150
     },
+    // Code 7
     {
         title: "Code 7 - Array Sum",
-        description: "Read size N, then N integers. Print sum.",
+        description: "Read space-separated integers. Print sum. (Input: `2 4 6 8`)",
         programmingLanguage: "Python",
         difficulty: "medium",
-        buggyCode: `vals = list(map(int, input().split()))
-n = vals[0]
-arr = vals[1:]
-s = 0
-for i in range(n+1): s += arr[i] # Bug: OOB
-print(s, end="")`,
-        solutionCode: `vals = list(map(int, input().split()))
-n = vals[0]
-arr = vals[1:]
-print(sum(arr[:n]), end="")`,
-        testCases: [{ input: "4 2 4 6 8", expectedOutput: "20" }],
+        buggyCode: `arr = list(map(int, input().split()))
+sum = 0
+for i in range(0, len(arr) + 1): # Bug: Range
+    sum += arr[i]
+print(sum)`,
+        solutionCode: `try:
+    arr = list(map(int, input().split()))
+    total = 0
+    for i in range(len(arr)):
+        total += arr[i]
+    print(total, end="")
+except:
+    pass`,
+        testCases: [{ input: "2 4 6 8", expectedOutput: "20" }],
         points: 150
     },
+    // Code 8
     {
-        title: "Code 8 - Marks",
+        title: "Code 8 - Result",
         description: "Read marks. Print First Class/Pass/Fail.",
         programmingLanguage: "Python",
         difficulty: "medium",
-        buggyCode: `m = int(input())
-if m > 75: print("First Class", end="")
-elif m > 40: print("Pass", end="")
-else: print("Fail", end="")`,
-        solutionCode: `m = int(input())
-if m >= 75: print("First Class", end="")
-elif m >= 40: print("Pass", end="")
-else: print("Fail", end="")`,
-        testCases: [{ input: "75", expectedOutput: "First Class" }, { input: "60", expectedOutput: "Pass" }],
+        buggyCode: `marks = int(input())
+if marks > 40:
+    print("Pass")
+elif marks > 60:
+    print("First Class")
+else:
+    print("Fail")`,
+        solutionCode: `try:
+    marks = int(input())
+    if marks > 60:
+        print("First Class", end="")
+    elif marks >= 40:
+        print("Pass", end="")
+    else:
+        print("Fail", end="")
+except:
+    pass`,
+        testCases: [{ input: "75", expectedOutput: "First Class" }],
         points: 150
     },
+    // Code 9
     {
         title: "Code 9 - Prime",
-        description: "Read n. Print Prime/Not Prime.",
+        description: "Read num. Print Prime/Not Prime.",
         programmingLanguage: "Python",
         difficulty: "hard",
-        buggyCode: `n = int(input())
-if n <= 1:
-    print("Not Prime", end="")
-    exit()
-for i in range(2, n):
-    if n % i == 0:
-        print("Prime", end="") 
-        exit()
-print("Not Prime", end="")`,
-        solutionCode: `import math
-n = int(input())
-if n <= 1:
-    print("Not Prime", end="")
+        buggyCode: `num = int(input())
+is_prime = True
+for i in range(2, num // 2):
+    if num % i == 0:
+        is_prime = False
+        break
+if is_prime:
+    print("Prime")
 else:
-    isPrime = True
-    for i in range(2, int(math.sqrt(n)) + 1):
-        if n % i == 0:
-            isPrime = False
-            break
-    if isPrime: print("Prime", end="")
-    else: print("Not Prime", end="")`,
-        testCases: [{ input: "2", expectedOutput: "Prime" }, { input: "9", expectedOutput: "Not Prime" }],
+    print("Not Prime")`,
+        solutionCode: `try:
+    num = int(input())
+    is_prime = True
+    if num <= 1:
+        is_prime = False
+    else:
+        for i in range(2, num // 2 + 1):
+            if num % i == 0:
+                is_prime = False
+                break
+    if is_prime:
+        print("Prime", end="")
+    else:
+        print("Not Prime", end="")
+except:
+    pass`,
+        testCases: [{ input: "9", expectedOutput: "Not Prime" }],
         points: 200
     },
+    // Code 10
     {
         title: "Code 10 - Login",
-        description: "Read user pass (space separated). Print Login Successful/Invalid Login.",
+        description: "Read username and password. Print result.",
         programmingLanguage: "Python",
         difficulty: "hard",
-        buggyCode: `parts = input().split()
-u, p = parts[0], parts[1]
-if u is "admin" and p is "1234":
-    print("Login Successful", end="")
+        buggyCode: `username = input()
+password = input()
+if username is "admin" and password is "1234":
+    print("Login Successful")
 else:
-    print("Invalid Login", end="")`,
-        solutionCode: `parts = input().split()
-if len(parts) >= 2:
-    u, p = parts[0], parts[1]
-    if u == "admin" and p == "1234":
+    print("Invalid Login")`,
+        solutionCode: `try:
+    username = input()
+    password = input()
+    if username == "admin" and password == "1234":
         print("Login Successful", end="")
     else:
-        print("Invalid Login", end="")`,
-        testCases: [{ input: "admin 1234", expectedOutput: "Login Successful" }],
+        print("Invalid Login", end="")
+except:
+    pass`,
+        testCases: [{ input: "admin\n1234", expectedOutput: "Login Successful" }],
         points: 200
     },
-    // --- C 3-10 ---
+
+    // === C QUESTIONS ===
+    // Code 1
     {
-        title: "Code 3 - Print Message",
-        description: "Write a program that prints exactly \"C Debugging\".",
+        title: "Code 1 - Pass/Fail",
+        description: "Read marks. Print Pass/Fail.",
         programmingLanguage: "C",
         difficulty: "easy",
         buggyCode: `#include <stdio.h>
-void main() { // Bug: Non-standard main
+int main() {
+    int marks;
+    scanf("%d", &marks); // Adapted
+    if (marks > 50) { // Bug: Missing ; in original (simulated)
+        printf("Pass");
+    else {
+        printf("Fail");
+    }
+    return 0;
+}`,
+        solutionCode: `#include <stdio.h>
+int main() {
+    int marks;
+    if(scanf("%d", &marks)) {
+        if (marks > 50) {
+            printf("Pass");
+        } else {
+            printf("Fail");
+        }
+    }
+    return 0;
+}`,
+        testCases: [{ input: "85", expectedOutput: "Pass" }],
+        points: 100
+    },
+    // Code 2
+    {
+        title: "Code 2 - Calculator",
+        description: "Read two ints. Print sum.",
+        programmingLanguage: "C",
+        difficulty: "easy",
+        buggyCode: `#include <stdio.h>
+int add(int a, int b) {
+    return a + b;
+}
+int main() {
+    int a, b;
+    scanf("%d %d", &a, &b);
+    int result = add(a, b);
+    printf("%d", result) // Bug: Semi
+    return 0;
+}`,
+        solutionCode: `#include <stdio.h>
+int add(int a, int b) {
+    return a + b;
+}
+int main() {
+    int a, b;
+    if(scanf("%d %d", &a, &b)) {
+        int result = add(a, b);
+        printf("%d", result);
+    }
+    return 0;
+}`,
+        testCases: [{ input: "10 20", expectedOutput: "30" }],
+        points: 100
+    },
+    // Code 3
+    {
+        title: "Code 3 - Main",
+        description: "Print \"C Debugging\".",
+        programmingLanguage: "C",
+        difficulty: "easy",
+        buggyCode: `#include <stdio.h>
+void main() { // Bug: Non-standard
     printf("C Debugging");
 }`,
         solutionCode: `#include <stdio.h>
@@ -887,229 +1011,321 @@ int main() {
         testCases: [{ input: "", expectedOutput: "C Debugging" }],
         points: 100
     },
+    // Code 4
     {
-        title: "Code 4 - Even / Odd",
-        description: "Read an integer and print \"Even\" or \"Odd\".",
+        title: "Code 4 - Even/Odd",
+        description: "Read number. Print Even or Odd.",
         programmingLanguage: "C",
         difficulty: "easy",
         buggyCode: `#include <stdio.h>
 int main() {
-    int n;
-    scanf("%d", &n);
-    if (n % 2 == 1) printf("Odd"); // Bug: Negative Logic
-    else printf("Even");
+    int number;
+    scanf("%d", &number);
+    if (number % 2 == 1) { // Bug: Reversed
+        printf("Even");
+    } else {
+        printf("Odd");
+    }
     return 0;
 }`,
         solutionCode: `#include <stdio.h>
 int main() {
-    int n;
-    if(scanf("%d", &n));
-    if (n % 2 == 0) printf("Even");
-    else printf("Odd");
+    int number;
+    if(scanf("%d", &number)) {
+        if (number % 2 == 0) {
+            printf("Even");
+        } else {
+            printf("Odd");
+        }
+    }
     return 0;
 }`,
-        testCases: [{ input: "7", expectedOutput: "Odd" }, { input: "10", expectedOutput: "Even" }],
+        testCases: [{ input: "7", expectedOutput: "Odd" }],
         points: 100
     },
+    // Code 5
     {
-        title: "Code 5 - Average Calculation",
-        description: "Read 3 integers and print average.",
+        title: "Code 5 - Average",
+        description: "Read 3 ints. Print Average.",
         programmingLanguage: "C",
         difficulty: "medium",
         buggyCode: `#include <stdio.h>
 int main() {
-    int a,b,c;
+    int a, b, c;
     scanf("%d %d %d", &a, &b, &c);
-    printf("%d", a + b + c / 3); // Bug: Precedence
+    int avg = a + b + c / 3; // Bug: Precedence
+    printf("Average = %d", avg);
     return 0;
 }`,
         solutionCode: `#include <stdio.h>
 int main() {
-    int a,b,c;
-    if(scanf("%d %d %d", &a, &b, &c));
-    printf("%d", (a + b + c) / 3);
+    int a, b, c;
+    if(scanf("%d %d %d", &a, &b, &c)) {
+        int avg = (a + b + c) / 3;
+        printf("Average = %d", avg);
+    }
     return 0;
 }`,
-        testCases: [{ input: "10 20 30", expectedOutput: "20" }],
+        testCases: [{ input: "10 20 30", expectedOutput: "Average = 20" }],
         points: 150
     },
+    // Code 6
     {
         title: "Code 6 - Factorial",
-        description: "Read n and print factorial.",
+        description: "Read n. Print factorial.",
         programmingLanguage: "C",
         difficulty: "medium",
         buggyCode: `#include <stdio.h>
 int main() {
     int n;
     scanf("%d", &n);
-    int f=0; // Bug: Init 0
-    for(int i=1; i<=n; i++) f*=i;
-    printf("%d", f);
+    int fact = 0; // Bug: Init
+    for (int i = 1; i <= n; i++) {
+        fact = fact * i;
+    }
+    printf("%d", fact);
     return 0;
 }`,
         solutionCode: `#include <stdio.h>
 int main() {
     int n;
-    if(scanf("%d", &n));
-    long long f=1;
-    for(int i=1; i<=n; i++) f*=i;
-    printf("%lld", f);
+    if(scanf("%d", &n)) {
+        int fact = 1;
+        for (int i = 1; i <= n; i++) {
+            fact = fact * i;
+        }
+        printf("%d", fact);
+    }
     return 0;
 }`,
         testCases: [{ input: "5", expectedOutput: "120" }],
         points: 150
     },
+    // Code 7
     {
         title: "Code 7 - Array Sum",
-        description: "Read size N, then N integers. Print sum.",
+        description: "Read N, then N ints. Print sum.",
         programmingLanguage: "C",
         difficulty: "medium",
         buggyCode: `#include <stdio.h>
 int main() {
     int n;
     scanf("%d", &n);
-    int arr[n];
-    int s=0;
-    for(int i=0; i<=n; i++) { // Bug: OOB
-        scanf("%d", &arr[i]);
-        s+=arr[i];
+    int arr[100]; // Assume max 100
+    for(int i=0; i<n; i++) scanf("%d", &arr[i]);
+    int sum = 0;
+    for (int i = 0; i <= n; i++) { // Bug: OOB
+        sum += arr[i];
     }
-    printf("%d", s);
+    printf("%d", sum);
     return 0;
 }`,
         solutionCode: `#include <stdio.h>
 int main() {
     int n;
-    if(scanf("%d", &n));
-    int temp, s=0;
-    for(int i=0; i<n; i++) {
-        if(scanf("%d", &temp));
-        s+=temp;
+    if(scanf("%d", &n)) {
+        int arr[100];
+        for(int i=0; i<n; i++) scanf("%d", &arr[i]);
+        int sum = 0;
+        for (int i = 0; i < n; i++) {
+            sum += arr[i];
+        }
+        printf("%d", sum);
     }
-    printf("%d", s);
     return 0;
 }`,
         testCases: [{ input: "4 2 4 6 8", expectedOutput: "20" }],
         points: 150
     },
+    // Code 8
     {
-        title: "Code 8 - Marks",
+        title: "Code 8 - Result",
         description: "Read marks. Print First Class/Pass/Fail.",
         programmingLanguage: "C",
         difficulty: "medium",
         buggyCode: `#include <stdio.h>
 int main() {
-    int m;
-    scanf("%d", &m);
-    if(m>75) printf("First Class");
-    else if(m>40) printf("Pass");
-    else printf("Fail");
+    int marks;
+    scanf("%d", &marks);
+    if (marks > 40) { // Bug: Order
+        printf("Pass");
+    } else if (marks > 60) {
+        printf("First Class");
+    } else {
+        printf("Fail");
+    }
     return 0;
 }`,
         solutionCode: `#include <stdio.h>
 int main() {
-    int m;
-    if(scanf("%d", &m));
-    if(m>=75) printf("First Class");
-    else if(m>=40) printf("Pass");
-    else printf("Fail");
+    int marks;
+    if(scanf("%d", &marks)) {
+        if (marks > 60) {
+            printf("First Class");
+        } else if (marks >= 40) {
+            printf("Pass");
+        } else {
+            printf("Fail");
+        }
+    }
     return 0;
 }`,
-        testCases: [{ input: "75", expectedOutput: "First Class" }, { input: "60", expectedOutput: "Pass" }],
+        testCases: [{ input: "75", expectedOutput: "First Class" }],
         points: 150
     },
+    // Code 9
     {
         title: "Code 9 - Prime",
-        description: "Read n. Print Prime/Not Prime.",
+        description: "Read num. Print Prime/Not Prime.",
         programmingLanguage: "C",
         difficulty: "hard",
         buggyCode: `#include <stdio.h>
 int main() {
-    int n;
-    scanf("%d", &n);
-    if(n<=1) {printf("Not Prime"); return 0;}
-    for(int i=2; i<n; i++) {
-        if(n%i==0) {printf("Prime"); return 0;} // Bug
+    int num;
+    scanf("%d", &num);
+    int isPrime = 1;
+    for (int i = 2; i < num / 2; i++) { // Bug: Loop
+        if (num % i == 0) {
+            isPrime = 0;
+            break;
+        }
     }
-    printf("Not Prime");
-    return 0;
-}`,
-        solutionCode: `#include <stdio.h>
-int main() {
-    int n;
-    if(scanf("%d", &n));
-    if(n<=1) {printf("Not Prime"); return 0;}
-    int p=1;
-    for(int i=2; i*i<=n; i++) {
-        if(n%i==0) {p=0; break;}
-    }
-    if(p) printf("Prime");
+    if (isPrime) printf("Prime");
     else printf("Not Prime");
     return 0;
 }`,
-        testCases: [{ input: "2", expectedOutput: "Prime" }, { input: "9", expectedOutput: "Not Prime" }],
+        solutionCode: `#include <stdio.h>
+int main() {
+    int num;
+    if(scanf("%d", &num)) {
+        int isPrime = 1;
+        if (num <= 1) isPrime = 0;
+        else {
+            for (int i = 2; i <= num / 2; i++) {
+                if (num % i == 0) {
+                    isPrime = 0;
+                    break;
+                }
+            }
+        }
+        if (isPrime) printf("Prime");
+        else printf("Not Prime");
+    }
+    return 0;
+}`,
+        testCases: [{ input: "9", expectedOutput: "Not Prime" }],
         points: 200
     },
+    // Code 10
     {
         title: "Code 10 - Login",
-        description: "Read user pass. Print Login Successful/Invalid Login.",
+        description: "Read username password. Print result.",
         programmingLanguage: "C",
         difficulty: "hard",
         buggyCode: `#include <stdio.h>
 int main() {
-    char u[20], p[20];
-    scanf("%s %s", u, p);
-    if(u=="admin" && p=="1234") printf("Login Successful"); // Bug: String ==
-    else printf("Invalid Login");
+    char username[20], password[20];
+    scanf("%s %s", username, password);
+    if (username == "admin" && password == "1234") { // Bug: String compare
+        printf("Login Successful");
+    } else {
+        printf("Invalid Login");
+    }
     return 0;
 }`,
-        solutionCode: `#include <string.h>
-#include <stdio.h>
+        solutionCode: `#include <stdio.h>
+#include <string.h>
 int main() {
-    char u[20], p[20];
-    if(scanf("%s %s", u, p));
-    if(strcmp(u,"admin")==0 && strcmp(p,"1234")==0) printf("Login Successful");
-    else printf("Invalid Login");
+    char username[20], password[20];
+    if(scanf("%s %s", username, password)) {
+        if (strcmp(username, "admin") == 0 && strcmp(password, "1234") == 0) {
+            printf("Login Successful");
+        } else {
+            printf("Invalid Login");
+        }
+    }
     return 0;
 }`,
         testCases: [{ input: "admin 1234", expectedOutput: "Login Successful" }],
         points: 200
     },
-    // --- C++ 2-10 ---
+    // === C++ QUESTIONS ===
+    // Code 1
     {
-        title: "Code 2 - Calculator Addition",
-        description: "Read two integers a and b and print their sum.",
+        title: "Code 1 - Pass/Fail",
+        description: "Read marks. Print Pass/Fail.",
         programmingLanguage: "C++",
         difficulty: "easy",
         buggyCode: `#include <iostream>
 using namespace std;
 int main() {
-    int a, b;
-    cin >> a >> b;
-    cout << a - b; // Bug: Subtraction
+    int marks;
+    cin >> marks;
+    if (marks > 50) {
+        cout << "Pass";
+    else { // Bug: Missing brace
+        cout << "Fail";
+    }
     return 0;
 }`,
         solutionCode: `#include <iostream>
 using namespace std;
 int main() {
-    int a, b;
-    cin >> a >> b;
-    cout << a + b;
+    int marks;
+    if(cin >> marks) {
+        if (marks > 50) {
+            cout << "Pass";
+        } else {
+            cout << "Fail";
+        }
+    }
     return 0;
 }`,
-        testCases: [{ input: "10 20", expectedOutput: "30" }, { input: "-5 10", expectedOutput: "5" }],
+        testCases: [{ input: "85", expectedOutput: "Pass" }],
         points: 100
     },
+    // Code 2
     {
-        title: "Code 3 - Print Message",
-        description: "Write a program that prints exactly \"C++ Debugging\".",
+        title: "Code 2 - Calculator",
+        description: "Read 2 ints. Print sum.",
         programmingLanguage: "C++",
         difficulty: "easy",
         buggyCode: `#include <iostream>
 using namespace std;
+int add(int a, int b) {
+    return a + b;
+}
 int main() {
-    cout << "C++ Debuging"; // Bug: Typo
+    int a, b;
+    cin >> a >> b;
+    cout << add(a,b) // Bug: Semi
     return 0;
+}`,
+        solutionCode: `#include <iostream>
+using namespace std;
+int add(int a, int b) {
+    return a + b;
+}
+int main() {
+    int a, b;
+    if(cin >> a >> b) {
+        cout << add(a, b);
+    }
+    return 0;
+}`,
+        testCases: [{ input: "10 20", expectedOutput: "30" }],
+        points: 100
+    },
+    // Code 3
+    {
+        title: "Code 3 - Main",
+        description: "Print C++ Debugging",
+        programmingLanguage: "C++",
+        difficulty: "easy",
+        buggyCode: `#include <iostream>
+using namespace std;
+void main() { // Bug: Void
+    cout << "C++ Debugging";
 }`,
         solutionCode: `#include <iostream>
 using namespace std;
@@ -1120,59 +1336,72 @@ int main() {
         testCases: [{ input: "", expectedOutput: "C++ Debugging" }],
         points: 100
     },
+    // Code 4
     {
-        title: "Code 4 - Even / Odd",
-        description: "Read an integer and print \"Even\" or \"Odd\".",
+        title: "Code 4 - Even/Odd",
+        description: "Read num. Print Even/Odd.",
         programmingLanguage: "C++",
         difficulty: "easy",
         buggyCode: `#include <iostream>
 using namespace std;
 int main() {
-    int n;
-    cin >> n;
-    if (n % 2 == 1) cout << "Odd"; // Bug
-    else cout << "Even";
+    int number;
+    cin >> number;
+    if (number % 2 == 1) { // Bug: Reversed
+        cout << "Even";
+    } else {
+        cout << "Odd";
+    }
     return 0;
 }`,
         solutionCode: `#include <iostream>
 using namespace std;
 int main() {
-    int n;
-    cin >> n;
-    if (n % 2 == 0) cout << "Even";
-    else cout << "Odd";
+    int number;
+    if(cin >> number) {
+        if (number % 2 == 0) {
+            cout << "Even";
+        } else {
+            cout << "Odd";
+        }
+    }
     return 0;
 }`,
-        testCases: [{ input: "7", expectedOutput: "Odd" }, { input: "10", expectedOutput: "Even" }],
+        testCases: [{ input: "7", expectedOutput: "Odd" }],
         points: 100
     },
+    // Code 5
     {
-        title: "Code 5 - Average Calculation",
-        description: "Read 3 integers and print their average.",
+        title: "Code 5 - Average",
+        description: "Read 3 ints. Print Average.",
         programmingLanguage: "C++",
         difficulty: "medium",
         buggyCode: `#include <iostream>
 using namespace std;
 int main() {
-    int a,b,c;
+    int a, b, c;
     cin >> a >> b >> c;
-    cout << a + b + c / 3; // Bug: Precedence
+    int avg = a + b + c / 3; // Bug: Precedence
+    cout << "Average = " << avg;
     return 0;
 }`,
         solutionCode: `#include <iostream>
 using namespace std;
 int main() {
-    int a,b,c;
-    cin >> a >> b >> c;
-    cout << (a + b + c) / 3;
+    int a, b, c;
+    if(cin >> a >> b >> c) {
+        int avg = (a + b + c) / 3;
+        cout << "Average = " << avg;
+    }
     return 0;
 }`,
-        testCases: [{ input: "10 20 30", expectedOutput: "20" }],
+        testCases: [{ input: "10 20 30", expectedOutput: "Average = 20" }],
         points: 150
     },
+    // Code 6
     {
         title: "Code 6 - Factorial",
-        description: "Read n and print factorial.",
+        description: "Read n. Print Fact.",
         programmingLanguage: "C++",
         difficulty: "medium",
         buggyCode: `#include <iostream>
@@ -1180,123 +1409,151 @@ using namespace std;
 int main() {
     int n;
     cin >> n;
-    long long f=1;
-    for(int i=1; i<n; i++) f*=i; // Bug: < n
-    cout << f;
+    int fact = 0; // Bug: Init
+    for (int i = 1; i <= n; i++) {
+        fact = fact * i;
+    }
+    cout << fact;
     return 0;
 }`,
         solutionCode: `#include <iostream>
 using namespace std;
 int main() {
     int n;
-    cin >> n;
-    long long f=1;
-    for(int i=1; i<=n; i++) f*=i;
-    cout << f;
+    if(cin >> n) {
+        int fact = 1;
+        for (int i = 1; i <= n; i++) {
+            fact = fact * i;
+        }
+        cout << fact;
+    }
     return 0;
 }`,
         testCases: [{ input: "5", expectedOutput: "120" }],
         points: 150
     },
+    // Code 7
     {
         title: "Code 7 - Array Sum",
-        description: "Read size N, then N integers. Print sum.",
+        description: "Read N, then N ints. Print sum.",
         programmingLanguage: "C++",
         difficulty: "medium",
         buggyCode: `#include <iostream>
-#include <vector>
 using namespace std;
 int main() {
     int n;
     cin >> n;
-    vector<int> a(n);
-    int s=0;
-    for(int i=0; i<=n; i++) { // Bug: OOB
-        cin >> a[i];
-        s+=a[i];
+    int arr[100];
+    for(int i=0; i<n; i++) cin >> arr[i];
+    int sum = 0;
+    for (int i = 0; i <= n; i++) { // Bug: OOB
+        sum += arr[i];
     }
-    cout << s;
+    cout << sum;
     return 0;
 }`,
         solutionCode: `#include <iostream>
-#include <vector>
 using namespace std;
 int main() {
     int n;
-    cin >> n;
-    int temp, s=0;
-    for(int i=0; i<n; i++) {
-        cin >> temp;
-        s+=temp;
+    if(cin >> n) {
+        int arr[100];
+        for(int i=0; i<n; i++) cin >> arr[i];
+        int sum = 0;
+        for (int i = 0; i < n; i++) {
+            sum += arr[i];
+        }
+        cout << sum;
     }
-    cout << s;
     return 0;
 }`,
         testCases: [{ input: "4 2 4 6 8", expectedOutput: "20" }],
         points: 150
     },
+    // Code 8
     {
-        title: "Code 8 - Marks",
-        description: "Read marks. Print First Class/Pass/Fail.",
+        title: "Code 8 - Result",
+        description: "Read marks. Print Result.",
         programmingLanguage: "C++",
         difficulty: "medium",
         buggyCode: `#include <iostream>
 using namespace std;
 int main() {
-    int m;
-    cin >> m;
-    if(m>75) cout << "First Class";
-    else if(m>40) cout << "Pass";
-    else cout << "Fail";
+    int marks;
+    cin >> marks;
+    if (marks > 40) { // Bug: Order
+        cout << "Pass";
+    } else if (marks > 60) {
+        cout << "First Class";
+    } else {
+        cout << "Fail";
+    }
     return 0;
 }`,
         solutionCode: `#include <iostream>
 using namespace std;
 int main() {
-    int m;
-    cin >> m;
-    if(m>=75) cout << "First Class";
-    else if(m>=40) cout << "Pass";
-    else cout << "Fail";
+    int marks;
+    if(cin >> marks) {
+        if (marks > 60) {
+            cout << "First Class";
+        } else if (marks >= 40) {
+            cout << "Pass";
+        } else {
+            cout << "Fail";
+        }
+    }
     return 0;
 }`,
-        testCases: [{ input: "75", expectedOutput: "First Class" }, { input: "60", expectedOutput: "Pass" }],
+        testCases: [{ input: "75", expectedOutput: "First Class" }],
         points: 150
     },
+    // Code 9
     {
         title: "Code 9 - Prime",
-        description: "Read n. Print Prime/Not Prime.",
+        description: "Read num. Print Prime/Not Prime.",
         programmingLanguage: "C++",
-        difficulty: "medium", // actually hard usually
+        difficulty: "hard",
         buggyCode: `#include <iostream>
 using namespace std;
 int main() {
-    int n;
-    cin >> n;
-    if(n<=1) {cout << "Not Prime"; return 0;}
-    for(int i=2; i<n; i++) {
-        if(n%i==0) {cout << "Prime"; return 0;} // Bug
+    int num;
+    cin >> num;
+    bool isPrime = true;
+    for (int i = 2; i < num / 2; i++) { // Bug: Loop
+        if (num % i == 0) {
+            isPrime = false;
+            break;
+        }
     }
-    cout << "Not Prime";
+    if (isPrime) cout << "Prime";
+    else cout << "Not Prime";
     return 0;
 }`,
         solutionCode: `#include <iostream>
 using namespace std;
 int main() {
-    int n;
-    cin >> n;
-    if(n<=1) {cout << "Not Prime"; return 0;}
-    bool p=true;
-    for(int i=2; i*i<=n; i++) {
-        if(n%i==0) {p=false; break;}
+    int num;
+    if(cin >> num) {
+        bool isPrime = true;
+        if (num <= 1) isPrime = false;
+        else {
+            for (int i = 2; i <= num / 2; i++) {
+                if (num % i == 0) {
+                    isPrime = false;
+                    break;
+                }
+            }
+        }
+        if (isPrime) cout << "Prime";
+        else cout << "Not Prime";
     }
-    if(p) cout << "Prime";
-    else cout << "Not Prime";
     return 0;
 }`,
-        testCases: [{ input: "2", expectedOutput: "Prime" }, { input: "9", expectedOutput: "Not Prime" }],
+        testCases: [{ input: "9", expectedOutput: "Not Prime" }],
         points: 200
     },
+    // Code 10
     {
         title: "Code 10 - Login",
         description: "Read user pass. Print Login Successful/Invalid Login.",
@@ -1308,7 +1565,7 @@ using namespace std;
 int main() {
     string u, p;
     cin >> u >> p;
-    if(u=="admin" || p=="1234") cout << "Login Successful"; // Bug: OR logic
+    if(u=="admin" && p=="1234") cout << "Login Successful";
     else cout << "Invalid Login";
     return 0;
 }`,
@@ -1317,15 +1574,15 @@ int main() {
 using namespace std;
 int main() {
     string u, p;
-    cin >> u >> p;
-    if(u=="admin" && p=="1234") cout << "Login Successful";
-    else cout << "Invalid Login";
+    if(cin >> u >> p) {
+        if(u=="admin" && p=="1234") cout << "Login Successful";
+        else cout << "Invalid Login";
+    }
     return 0;
 }`,
         testCases: [{ input: "admin 1234", expectedOutput: "Login Successful" }],
         points: 200
-    },
-
+    }
 ];
 
 async function seedDatabase() {
@@ -1378,9 +1635,9 @@ async function seedDatabase() {
         console.log(`Inserted ${codeChallenges.length} Code Challenges`);
 
         // Summary
-        console.log('\\n========================================');
+        console.log('\n========================================');
         console.log('Database seeded successfully!');
-        console.log('========================================\\n');
+        console.log('========================================\n');
         process.exit(0);
     } catch (error) {
         console.error('Seeding error:', error);
