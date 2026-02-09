@@ -348,7 +348,7 @@ public class Main {
             int marks = sc.nextInt();
             if (marks > 50) {
                 System.out.print("Pass");
-            else { // Bug: Syntax error missing brace and alignment
+            else { 
                 System.out.print("Fail");
             }
         }
@@ -387,7 +387,7 @@ class Calculator {
         int a = sc.nextInt();
         int b = sc.nextInt();
         int result = add(a, b);
-        System.out.print(result) // Bug: Missing semicolon
+        System.out.print(result) 
     }
 }`,
         solutionCode: `import java.util.Scanner;
@@ -415,7 +415,7 @@ class Calculator {
         programmingLanguage: "Java",
         difficulty: "easy",
         buggyCode: `public class Sample {
-    public static void main(String args) { // Bug: Incorrect parameter
+    public static void main(String args) { 
         System.out.print("Java Debugging");
     }
 }`,
@@ -438,7 +438,7 @@ class EvenOdd {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int number = sc.nextInt();
-        if(number % 2 == 1) { // Bug: Reverse logic
+        if(number % 2 == 1) { 
             System.out.print("Even");
         } else {
             System.out.print("Odd");
@@ -475,7 +475,7 @@ class Average {
         int a = sc.nextInt();
         int b = sc.nextInt();
         int c = sc.nextInt();
-        int avg = a + b + c / 3; // Bug: Precedence
+        int avg = a + b + c / 3; 
         System.out.print("Average = " + avg);
     }
 }`,
@@ -506,7 +506,7 @@ class Factorial {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        int fact = 0; // Bug: Wrong init
+        int fact = 0;
         for(int i = 1; i <= n; i++) {
             fact = fact * i;
         }
@@ -544,7 +544,7 @@ class ArraySum {
         int[] arr = new int[n];
         for(int i=0; i<n; i++) arr[i] = sc.nextInt();
         int sum = 0;
-        for(int i = 0; i <= arr.length; i++) { // Bug: OOB
+        for(int i = 0; i <= arr.length; i++) { 
             sum += arr[i];
         }
         System.out.print(sum);
@@ -580,7 +580,7 @@ class Result {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int marks = sc.nextInt();
-        if(marks > 40) { // Bug: Order
+        if(marks > 40) { 
             System.out.print("Pass");
         } else if(marks > 60) {
             System.out.print("First Class");
@@ -620,7 +620,7 @@ class PrimeCheck {
         Scanner sc = new Scanner(System.in);
         int num = sc.nextInt();
         boolean isPrime = true;
-        for(int i = 2; i < num / 2; i++) { // Bug: Loop limit
+        for(int i = 2; i < num / 2; i++) { 
             if(num % i == 0) {
                 isPrime = false;
                 break;
@@ -666,7 +666,7 @@ class Login {
         Scanner sc = new Scanner(System.in);
         String username = sc.next();
         String password = sc.next();
-        if(username == "admin" && password == "1234") { // Bug: String comparison
+        if(username == "admin" && password == "1234") { 
             System.out.print("Login Successful");
         } else {
             System.out.print("Invalid Login");
@@ -712,7 +712,12 @@ else:
         print("Fail", end="")
 except:
     pass`,
-        testCases: [{ input: "85", expectedOutput: "Pass" }],
+        testCases: [
+            { input: "85", expectedOutput: "Pass" },
+            { input: "51", expectedOutput: "Pass" },
+            { input: "50", expectedOutput: "Fail" },
+            { input: "30", expectedOutput: "Fail" }
+        ],
         points: 100
     },
     // Code 2
@@ -725,7 +730,7 @@ except:
     return a + b
 a = int(input())
 b = int(input())
-result = add a, b # Bug: Syntax
+result = add a, b 
 print(result)`,
         solutionCode: `def add(a, b):
     return a + b
@@ -736,7 +741,12 @@ try:
     print(result, end="")
 except:
     pass`,
-        testCases: [{ input: "10 20", expectedOutput: "30" }],
+        testCases: [
+            { input: "10 20", expectedOutput: "30" },
+            { input: "0 5", expectedOutput: "5" },
+            { input: "-5 10", expectedOutput: "5" },
+            { input: "-3 -7", expectedOutput: "-10" }
+        ],
         points: 100
     },
     // Code 3
@@ -746,7 +756,7 @@ except:
         programmingLanguage: "Python",
         difficulty: "easy",
         buggyCode: `def main():
-print("Python Debugging") # Bug: Indentation
+print("Python Debugging") 
 main()`,
         solutionCode: `def main():
     print("Python Debugging", end="")
@@ -761,7 +771,7 @@ main()`,
         programmingLanguage: "Python",
         difficulty: "easy",
         buggyCode: `number = int(input())
-if number % 2 == 1: # Bug: Reversed
+if number % 2 == 1: 
     print("Even")
 else:
     print("Odd")`,
@@ -773,7 +783,12 @@ else:
         print("Odd", end="")
 except:
     pass`,
-        testCases: [{ input: "7", expectedOutput: "Odd" }],
+        testCases: [
+            { input: "7", expectedOutput: "Odd" },
+            { input: "10", expectedOutput: "Even" },
+            { input: "0", expectedOutput: "Even" },
+            { input: "-3", expectedOutput: "Odd" }
+        ],
         points: 100
     },
     // Code 5
@@ -785,7 +800,7 @@ except:
         buggyCode: `a = int(input())
 b = int(input())
 c = int(input())
-avg = a + b + c / 3 # Bug: Precedence
+avg = a + b + c / 3 
 print("Average =", avg)`,
         solutionCode: `try:
     a = int(input())
@@ -795,7 +810,12 @@ print("Average =", avg)`,
     print("Average =", avg, end="")
 except:
     pass`,
-        testCases: [{ input: "10 20 30", expectedOutput: "Average = 20" }],
+        testCases: [
+            { input: "10 20 30", expectedOutput: "Average = 20" },
+            { input: "5 5 5", expectedOutput: "Average = 5" },
+            { input: "0 0 0", expectedOutput: "Average = 0" },
+            { input: "1 2 2", expectedOutput: "Average = 1" }
+        ],
         points: 150
     },
     // Code 6
@@ -805,7 +825,7 @@ except:
         programmingLanguage: "Python",
         difficulty: "medium",
         buggyCode: `n = int(input())
-fact = 0 # Bug: Init 0
+fact = 0 
 for i in range(1, n + 1):
     fact = fact * i
 print(fact)`,
@@ -817,7 +837,12 @@ print(fact)`,
     print(fact, end="")
 except:
     pass`,
-        testCases: [{ input: "5", expectedOutput: "120" }],
+        testCases: [
+            { input: "5", expectedOutput: "120" },
+            { input: "1", expectedOutput: "1" },
+            { input: "0", expectedOutput: "1" },
+            { input: "3", expectedOutput: "6" }
+        ],
         points: 150
     },
     // Code 7
@@ -828,7 +853,7 @@ except:
         difficulty: "medium",
         buggyCode: `arr = list(map(int, input().split()))
 sum = 0
-for i in range(0, len(arr) + 1): # Bug: Range
+for i in range(0, len(arr) + 1): 
     sum += arr[i]
 print(sum)`,
         solutionCode: `try:
@@ -839,7 +864,11 @@ print(sum)`,
     print(total, end="")
 except:
     pass`,
-        testCases: [{ input: "2 4 6 8", expectedOutput: "20" }],
+        testCases: [
+            { input: "2 4 6 8", expectedOutput: "20" },
+            { input: "1 1 1", expectedOutput: "3" },
+            { input: "5", expectedOutput: "5" }
+        ],
         points: 150
     },
     // Code 8
@@ -865,7 +894,13 @@ else:
         print("Fail", end="")
 except:
     pass`,
-        testCases: [{ input: "75", expectedOutput: "First Class" }],
+        testCases: [
+            { input: "75", expectedOutput: "First Class" },
+            { input: "60", expectedOutput: "Pass" },
+            { input: "40", expectedOutput: "Pass" },
+            { input: "39", expectedOutput: "Fail" },
+            { input: "0", expectedOutput: "Fail" }
+        ],
         points: 150
     },
     // Code 9
@@ -900,7 +935,14 @@ else:
         print("Not Prime", end="")
 except:
     pass`,
-        testCases: [{ input: "9", expectedOutput: "Not Prime" }],
+        testCases: [
+            { input: "2", expectedOutput: "Prime" },
+            { input: "3", expectedOutput: "Prime" },
+            { input: "9", expectedOutput: "Not Prime" },
+            { input: "1", expectedOutput: "Not Prime" },
+            { input: "0", expectedOutput: "Not Prime" },
+            { input: "17", expectedOutput: "Prime" }
+        ],
         points: 200
     },
     // Code 10
@@ -924,7 +966,13 @@ else:
         print("Invalid Login", end="")
 except:
     pass`,
-        testCases: [{ input: "admin\n1234", expectedOutput: "Login Successful" }],
+        testCases: [
+            { input: "admin\n1234", expectedOutput: "Login Successful" },
+            { input: "admin\n0000", expectedOutput: "Invalid Login" },
+            { input: "user\n1234", expectedOutput: "Invalid Login" },
+            { input: "ADMIN\n1234", expectedOutput: "Invalid Login" },
+            { input: "admin\nAdmin", expectedOutput: "Invalid Login" }
+        ],
         points: 200
     },
 
@@ -938,8 +986,8 @@ except:
         buggyCode: `#include <stdio.h>
 int main() {
     int marks;
-    scanf("%d", &marks); // Adapted
-    if (marks > 50) { // Bug: Missing ; in original (simulated)
+    scanf("%d", &marks); 
+    if (marks > 50) { 
         printf("Pass");
     else {
         printf("Fail");
@@ -975,7 +1023,7 @@ int main() {
     int a, b;
     scanf("%d %d", &a, &b);
     int result = add(a, b);
-    printf("%d", result) // Bug: Semi
+    printf("%d", result) 
     return 0;
 }`,
         solutionCode: `#include <stdio.h>
@@ -1000,7 +1048,7 @@ int main() {
         programmingLanguage: "C",
         difficulty: "easy",
         buggyCode: `#include <stdio.h>
-void main() { // Bug: Non-standard
+void main() { 
     printf("C Debugging");
 }`,
         solutionCode: `#include <stdio.h>
@@ -1021,7 +1069,7 @@ int main() {
 int main() {
     int number;
     scanf("%d", &number);
-    if (number % 2 == 1) { // Bug: Reversed
+    if (number % 2 == 1) { 
         printf("Even");
     } else {
         printf("Odd");
@@ -1053,7 +1101,7 @@ int main() {
 int main() {
     int a, b, c;
     scanf("%d %d %d", &a, &b, &c);
-    int avg = a + b + c / 3; // Bug: Precedence
+    int avg = a + b + c / 3; 
     printf("Average = %d", avg);
     return 0;
 }`,
@@ -1079,7 +1127,7 @@ int main() {
 int main() {
     int n;
     scanf("%d", &n);
-    int fact = 0; // Bug: Init
+    int fact = 0; 
     for (int i = 1; i <= n; i++) {
         fact = fact * i;
     }
@@ -1114,7 +1162,7 @@ int main() {
     int arr[100]; // Assume max 100
     for(int i=0; i<n; i++) scanf("%d", &arr[i]);
     int sum = 0;
-    for (int i = 0; i <= n; i++) { // Bug: OOB
+    for (int i = 0; i <= n; i++) { 
         sum += arr[i];
     }
     printf("%d", sum);
@@ -1147,7 +1195,7 @@ int main() {
 int main() {
     int marks;
     scanf("%d", &marks);
-    if (marks > 40) { // Bug: Order
+    if (marks > 40) { 
         printf("Pass");
     } else if (marks > 60) {
         printf("First Class");
@@ -1184,7 +1232,7 @@ int main() {
     int num;
     scanf("%d", &num);
     int isPrime = 1;
-    for (int i = 2; i < num / 2; i++) { // Bug: Loop
+    for (int i = 2; i < num / 2; i++) { 
         if (num % i == 0) {
             isPrime = 0;
             break;
@@ -1226,7 +1274,7 @@ int main() {
 int main() {
     char username[20], password[20];
     scanf("%s %s", username, password);
-    if (username == "admin" && password == "1234") { // Bug: String compare
+    if (username == "admin" && password == "1234") { 
         printf("Login Successful");
     } else {
         printf("Invalid Login");
@@ -1263,7 +1311,7 @@ int main() {
     cin >> marks;
     if (marks > 50) {
         cout << "Pass";
-    else { // Bug: Missing brace
+    else { 
         cout << "Fail";
     }
     return 0;
@@ -1298,7 +1346,7 @@ int add(int a, int b) {
 int main() {
     int a, b;
     cin >> a >> b;
-    cout << add(a,b) // Bug: Semi
+    cout << add(a,b) 
     return 0;
 }`,
         solutionCode: `#include <iostream>
@@ -1324,7 +1372,7 @@ int main() {
         difficulty: "easy",
         buggyCode: `#include <iostream>
 using namespace std;
-void main() { // Bug: Void
+void main() { 
     cout << "C++ Debugging";
 }`,
         solutionCode: `#include <iostream>
@@ -1347,7 +1395,7 @@ using namespace std;
 int main() {
     int number;
     cin >> number;
-    if (number % 2 == 1) { // Bug: Reversed
+    if (number % 2 == 1) { 
         cout << "Even";
     } else {
         cout << "Odd";
@@ -1381,7 +1429,7 @@ using namespace std;
 int main() {
     int a, b, c;
     cin >> a >> b >> c;
-    int avg = a + b + c / 3; // Bug: Precedence
+    int avg = a + b + c / 3; 
     cout << "Average = " << avg;
     return 0;
 }`,
@@ -1409,7 +1457,7 @@ using namespace std;
 int main() {
     int n;
     cin >> n;
-    int fact = 0; // Bug: Init
+    int fact = 0; 
     for (int i = 1; i <= n; i++) {
         fact = fact * i;
     }
@@ -1446,7 +1494,7 @@ int main() {
     int arr[100];
     for(int i=0; i<n; i++) cin >> arr[i];
     int sum = 0;
-    for (int i = 0; i <= n; i++) { // Bug: OOB
+    for (int i = 0; i <= n; i++) { 
         sum += arr[i];
     }
     cout << sum;
@@ -1481,7 +1529,7 @@ using namespace std;
 int main() {
     int marks;
     cin >> marks;
-    if (marks > 40) { // Bug: Order
+    if (marks > 40) { 
         cout << "Pass";
     } else if (marks > 60) {
         cout << "First Class";
@@ -1520,7 +1568,7 @@ int main() {
     int num;
     cin >> num;
     bool isPrime = true;
-    for (int i = 2; i < num / 2; i++) { // Bug: Loop
+    for (int i = 2; i < num / 2; i++) { 
         if (num % i == 0) {
             isPrime = false;
             break;
