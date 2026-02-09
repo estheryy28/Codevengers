@@ -6,6 +6,7 @@ const Submission = require('../models/Submission');
 require('dotenv').config();
 
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/quiz-system';
+console.log('Using MONGO_URI:', MONGO_URI);
 
 // === Sample Data ===
 
@@ -1650,12 +1651,12 @@ async function seedDatabase() {
         // Create admin user
         console.log('Creating admin user...');
         const adminUser = new User({
-            username: 'Esther',
+            username: 'esther',
             password: 'AiTronix@2026!',
             role: 'ADMIN'
         });
         await adminUser.save();
-        console.log('Admin user created: Esther / AiTronix@2026!');
+        console.log('Admin user created: esther / AiTronix@2026!');
 
         // Create sample test user
         const testUser = new User({
