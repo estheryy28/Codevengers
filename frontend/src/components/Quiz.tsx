@@ -104,19 +104,117 @@ export default function Quiz() {
             }
         };
 
-        // Add event listeners
+        const preventDefault = (e: Event) => e.preventDefault();
+
+        const handleKeyDown = (e: KeyboardEvent) => {
+            // Block F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C, Ctrl+U
+            if (
+                e.key === 'F12' ||
+                (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) ||
+                (e.ctrlKey && e.key === 'u')
+            ) {
+                e.preventDefault();
+                return false;
+            }
+        };
+
+        // Add listeners
         document.addEventListener('visibilitychange', handleVisibilityChange);
         document.addEventListener('fullscreenchange', handleFullscreenChange);
         window.addEventListener('blur', handleWindowBlur);
 
+        // Security listeners
+        document.addEventListener('contextmenu', preventDefault);
+        document.addEventListener('copy', preventDefault);
+        document.addEventListener('cut', preventDefault);
+        document.addEventListener('paste', preventDefault);
+        document.addEventListener('keydown', handleKeyDown);
+        document.addEventListener('selectstart', preventDefault); // Block selection start
+
+        // Aggressive Extension Blocker: MutationObserver
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                mutation.addedNodes.forEach((node) => {
+                    if (node.nodeType === 1) {
+                        const element = node as HTMLElement;
+                        if (element.id !== 'root' && element.tagName !== 'SCRIPT' && element.tagName !== 'STYLE' && element.tagName !== 'LINK') {
+                            element.remove();
+                        }
+                    }
+                });
+            });
+        });
+
+        observer.observe(document.body, { childList: true, subtree: false });
+
+        // NUCLEAR OPTION: CSS Hiding & Interval Cleaner
+        // 1. Inject style to hide everything except root
+        const style = document.createElement('style');
+        style.id = 'security-style';
+        style.innerHTML = `
+            body > *:not(#root):not(script):not(style):not(link) { 
+                display: none !important; 
+                opacity: 0 !important; 
+                pointer-events: none !important; 
+                visibility: hidden !important; 
+            }
+        `;
+        document.head.appendChild(style);
+
+        // 2. Interval cleaner for persistent extensions
+        const cleanerInterval = setInterval(() => {
+            const bodyChildren = document.body.children;
+            for (let i = 0; i < bodyChildren.length; i++) {
+                const child = bodyChildren[i];
+                if (child.id !== 'root' && child.tagName !== 'SCRIPT' && child.tagName !== 'STYLE' && child.tagName !== 'LINK') {
+                    child.remove();
+                }
+            }
+        }, 500);
+
+        // 3. Block interaction with anything outside root
+        const handleGlobalClick = (e: MouseEvent) => {
+            const root = document.getElementById('root');
+            if (root && !root.contains(e.target as Node)) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        };
+        window.addEventListener('click', handleGlobalClick, true);
+
+
+        // Aggressive Selection Clearing
+        const clearSelection = () => {
+            if (window.getSelection) {
+                window.getSelection()?.removeAllRanges();
+            }
+        };
+        document.addEventListener('selectionchange', clearSelection);
+
         // Cleanup on unmount
         return () => {
-            isExamActive = false;
             document.removeEventListener('visibilitychange', handleVisibilityChange);
             document.removeEventListener('fullscreenchange', handleFullscreenChange);
             window.removeEventListener('blur', handleWindowBlur);
+
+            document.removeEventListener('contextmenu', preventDefault);
+            document.removeEventListener('copy', preventDefault);
+            document.removeEventListener('cut', preventDefault);
+            document.removeEventListener('paste', preventDefault);
+            document.removeEventListener('keydown', handleKeyDown);
+            document.removeEventListener('selectstart', preventDefault);
+            document.removeEventListener('selectionchange', clearSelection);
+
+            window.removeEventListener('click', handleGlobalClick, true);
+
+            observer.disconnect();
+            clearInterval(cleanerInterval);
+            const styleEl = document.getElementById('security-style');
+            if (styleEl) styleEl.remove();
         };
     }, [logout, navigate]);
+
+
 
     // Fetch challenges list
     useEffect(() => {
