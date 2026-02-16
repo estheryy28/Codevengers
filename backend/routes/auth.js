@@ -116,6 +116,7 @@ router.post('/login', async (req, res) => {
             });
         }
 
+<<<<<<< HEAD
         // Check if user is disqualified
         if (user.isDisqualified) {
             return res.status(403).json({
@@ -124,6 +125,8 @@ router.post('/login', async (req, res) => {
             });
         }
 
+=======
+>>>>>>> 2ad77c6470fc98a9002d3cc2e22bc860cab2a578
         // Check if user has already completed the quiz
         // Logic: If role is USER, quizStarted is false, AND they have completed questions (> 0)
         // This implies they finished the quiz loop.
@@ -152,9 +155,13 @@ router.post('/login', async (req, res) => {
                     selectedProgrammingLanguage: user.selectedProgrammingLanguage,
                     totalScore: user.totalScore,
                     completedQuestions: user.completedQuestions.length,
+<<<<<<< HEAD
                     quizStarted: user.quizStarted,
                     violations: user.violations,
                     isDisqualified: user.isDisqualified
+=======
+                    quizStarted: user.quizStarted
+>>>>>>> 2ad77c6470fc98a9002d3cc2e22bc860cab2a578
                 },
                 token
             }
@@ -186,9 +193,13 @@ router.get('/me', auth, async (req, res) => {
                     selectedProgrammingLanguage: user.selectedProgrammingLanguage,
                     totalScore: user.totalScore,
                     completedQuestions: user.completedQuestions.length,
+<<<<<<< HEAD
                     quizStarted: user.quizStarted,
                     violations: user.violations,
                     isDisqualified: user.isDisqualified
+=======
+                    quizStarted: user.quizStarted
+>>>>>>> 2ad77c6470fc98a9002d3cc2e22bc860cab2a578
                 }
             }
         });
@@ -201,6 +212,7 @@ router.get('/me', auth, async (req, res) => {
     }
 });
 
+<<<<<<< HEAD
 /**
  * @route   POST /api/auth/violation
  * @desc    Record a cheating violation
@@ -256,4 +268,6 @@ router.post('/violation', auth, async (req, res) => {
     }
 });
 
+=======
+>>>>>>> 2ad77c6470fc98a9002d3cc2e22bc860cab2a578
 module.exports = router;

@@ -12,8 +12,11 @@ interface User {
     totalScore: number;
     quizStarted: boolean;
     completedQuestions: number;
+<<<<<<< HEAD
     violations: number;
     isDisqualified: boolean;
+=======
+>>>>>>> 2ad77c6470fc98a9002d3cc2e22bc860cab2a578
 }
 
 interface Stats {
@@ -275,12 +278,16 @@ export default function AdminDashboard() {
                                         <th>Language</th>
                                         <th>Score</th>
                                         <th>Progress</th>
+<<<<<<< HEAD
                                         <th>Violations</th>
+=======
+>>>>>>> 2ad77c6470fc98a9002d3cc2e22bc860cab2a578
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {users.map((user) => (
+<<<<<<< HEAD
                                         <tr key={user._id} className={user.isDisqualified ? 'bg-red-500/10' : ''}>
                                             <td className="font-medium">
                                                 {user.username}
@@ -290,6 +297,10 @@ export default function AdminDashboard() {
                                                     </span>
                                                 )}
                                             </td>
+=======
+                                        <tr key={user._id}>
+                                            <td className="font-medium">{user.username}</td>
+>>>>>>> 2ad77c6470fc98a9002d3cc2e22bc860cab2a578
                                             <td>
                                                 <span className={`badge ${user.role === 'ADMIN' ? 'badge-purple' : 'badge-info'}`}>
                                                     {user.role}
@@ -319,6 +330,7 @@ export default function AdminDashboard() {
                                                 )}
                                             </td>
                                             <td>
+<<<<<<< HEAD
                                                 <div className="flex items-center gap-2">
                                                     <span className={`font-bold ${user.violations > 0 ? 'text-red-400' : 'text-white/40'}`}>
                                                         {user.violations || 0}
@@ -327,6 +339,8 @@ export default function AdminDashboard() {
                                                 </div>
                                             </td>
                                             <td>
+=======
+>>>>>>> 2ad77c6470fc98a9002d3cc2e22bc860cab2a578
                                                 <div className="flex items-center gap-3">
                                                     <button
                                                         onClick={() => handleViewLogs(user._id)}

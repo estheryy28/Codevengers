@@ -33,8 +33,11 @@ router.get('/users', async (req, res) => {
                 totalScore: user.totalScore,
                 completedQuestions: user.completedQuestions.length,
                 quizStarted: user.quizStarted,
+<<<<<<< HEAD
                 violations: user.violations || 0,
                 isDisqualified: user.isDisqualified || false,
+=======
+>>>>>>> 2ad77c6470fc98a9002d3cc2e22bc860cab2a578
                 totalAttempts: attemptCount,
                 createdAt: user.createdAt
             };

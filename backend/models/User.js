@@ -34,6 +34,7 @@ const userSchema = new mongoose.Schema({
     quizStarted: {
         type: Boolean,
         default: false
+<<<<<<< HEAD
     },
     violations: {
         type: Number,
@@ -42,6 +43,8 @@ const userSchema = new mongoose.Schema({
     isDisqualified: {
         type: Boolean,
         default: false
+=======
+>>>>>>> 2ad77c6470fc98a9002d3cc2e22bc860cab2a578
     }
 }, {
     timestamps: true

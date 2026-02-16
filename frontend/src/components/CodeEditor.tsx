@@ -45,8 +45,11 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
                     wordWrap: 'on',
                     padding: { top: 10, bottom: 10 },
                     fontFamily: "'Fira Code', 'Consolas', monospace",
+<<<<<<< HEAD
                     fontLigatures: true,
                     letterSpacing: 0,
+=======
+>>>>>>> 2ad77c6470fc98a9002d3cc2e22bc860cab2a578
                     renderLineHighlight: 'all',
                     cursorBlinking: 'smooth',
                     cursorSmoothCaretAnimation: 'on',
